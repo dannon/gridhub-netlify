@@ -5,10 +5,10 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 module.exports = {
-  siteName: 'Gridsome Test',
-  siteDescription: 'A test site for learning Gridsome',
+  siteName: 'Galaxy Community Hub: The Squeakquel',
+  siteDescription: 'Galaxy Community Hub - Gridsome version',
   templates: {
-    Post: '/blog/:title',
+    Post: '/posts/:title',
   },
   plugins: [
     {
@@ -16,7 +16,7 @@ module.exports = {
       options: {
         path: 'content/posts/**/*.md',
         typeName: 'Post',
-        route: '/blog/:slug',
+        route: '/posts/:slug',
       }
     }
   ],
