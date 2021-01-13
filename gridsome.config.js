@@ -8,7 +8,7 @@ module.exports = {
   siteName: 'Galaxy Community Hub: The Squeakquel',
   siteDescription: 'Galaxy Community Hub - Gridsome version',
   templates: {
-    Post: '/posts/:title',
+    Post: '/:type/:title',
   },
   plugins: [
     {

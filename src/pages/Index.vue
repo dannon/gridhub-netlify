@@ -30,7 +30,9 @@
 
     <section class="posts">
       <h2><g-link to="/news/">News</g-link></h2>
-      <PostListBrief v-for="edge in $page.allPost.edges" :key="edge.node.id" :post="edge.node" />
+      <PostListBrief v-for="edge in $page.news.edges" :key="edge.node.id" :post="edge.node" />
+      <h2><g-link to="/events/">Events</g-link></h2>
+      <PostListBrief v-for="edge in $page.events.edges" :key="edge.node.id" :post="edge.node" />
     </section>
 
   </Layout>
@@ -53,7 +55,18 @@ query {
   metadata {
     siteName
   }
-  allPost {
+  news: allPost(filter: { type: { eq: "news" }}) {
+    totalCount
+    edges {
+      node {
+        id
+        title
+        description
+        path
+      }
+    }
+  }
+  events: allPost(filter: { type: { eq: "events" }}) {
     totalCount
     edges {
       node {
