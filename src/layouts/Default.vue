@@ -6,11 +6,15 @@
       </g-link>
       <nav class="nav">
         <g-link class="nav__link" to="/use/">Use</g-link>
+        <g-link class="nav__link" to="/news/">News</g-link>
+        <g-link class="nav__link" to="/events/">Events</g-link>
         <g-link class="nav__link" to="/jobs/">Jobs</g-link>
         <g-link class="nav__link" to="/jxtx/">@jxtx</g-link>
       </nav>
     </header>
-    <slot/>
+    <section class="main">
+      <slot/>
+    </section>
   </div>
 </template>
 
@@ -31,10 +35,7 @@ body {
 }
 
 .layout {
-  max-width: 900px;
   margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 20px;
 }
 
 #masthead {
@@ -42,8 +43,8 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
   height: 65px;
   background-color: #2c3143;
 }
@@ -60,8 +61,14 @@ body {
   margin-left: 20px;
 }
 
+.main {
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
 a {
   color: #2882dc;
   text-decoration: none;
+  font-weight: normal;
 }
 </style>

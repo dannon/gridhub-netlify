@@ -1,7 +1,7 @@
 <template>
   <div class="post-list">
     <h1 class="title"><g-link :to="post.path" class="read">{{ post.title }}</g-link></h1>
-    <p class="description">{{ post.description }}</p>
+    <p class="description">{{ post.tease }}</p>
   </div>
 </template>
 

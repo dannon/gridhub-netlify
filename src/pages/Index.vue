@@ -33,8 +33,13 @@
       <PostListBrief v-for="edge in $page.news.edges" :key="edge.node.id" :post="edge.node" />
       <h2><g-link to="/events/">Events</g-link></h2>
       <PostListBrief v-for="edge in $page.events.edges" :key="edge.node.id" :post="edge.node" />
+      <h2><g-link to="/blog/">Blog</g-link></h2>
+      <PostListBrief v-for="edge in $page.blog.edges" :key="edge.node.id" :post="edge.node" />
     </section>
 
+    <footer class="acknowledgment">
+      The Galaxy Project is supported in part by NSF, NHGRI, The Huck Institutes of the Life Sciences, The Institute for CyberScience at Penn State, and Johns Hopkins University.
+    </footer>
   </Layout>
 </template>
 
@@ -55,25 +60,36 @@ query {
   metadata {
     siteName
   }
-  news: allPost(filter: { type: { eq: "news" }}) {
+  news: allPost(filter: { category: { eq: "news" }}) {
     totalCount
     edges {
       node {
         id
         title
-        description
+        tease
         path
       }
     }
   }
-  events: allPost(filter: { type: { eq: "events" }}) {
+  events: allPost(filter: { category: { eq: "events" }}) {
+    totalCount
+    edges {
+      node {
+        id
+        title
+        tease
+        path
+      }
+    }
+  }
+  blog: allPost(filter: { category: { eq: "blog" }}) {
     totalCount
     edges {
       node {
         id
         title
         timeToRead
-        description
+        tease
         date (format: "D MMMM YYYY")
         path
       }
@@ -86,5 +102,9 @@ query {
 #page-title {
   font-size: 48px;
   font-weight: 300;
+}
+footer {
+  margin-top: 20px;
+  font-size: 85%;
 }
 </style>

@@ -1,13 +1,12 @@
 <template>
   <Layout>
     <br />
-    <g-link to="/" class="link"> &larr; Go Back</g-link>
-    <div class="post-title">
-      <h1>{{ $page.post.title }}</h1>
-      <p class="post-date">
-        {{ $page.post.date }} | {{ $page.post.timeToRead }} min read
-      </p>
-    </div>
+    <g-link to="/" class="link"> &larr; Home</g-link>
+    <header class="post-header">
+      <h1 class="post-title">{{ $page.post.title }}</h1>
+      <h2 class="post-subtitle">{{ $page.post.tease }}</h2>
+      <p class="post-date">{{ $page.post.date }}</p>
+    </header>
     <div class="post-content">
       <p v-html="$page.post.content" />
     </div>
@@ -19,26 +18,30 @@ query Post ($path: String!) {
    post: post (path: $path) {
     id
     title
-    content
+    tease
     date (format: "D MMMM YYYY")
-    timeToRead
+    content
   }
 }
 </page-query>
 
 <style>
 .post-title {
-  text-align: center;
-  font-size: 30px;
+  font-size: 28px;
+  font-weight: 300;
   line-height: 1.4em;
-  padding: 2em 0;
-  font-family: "Stylish";
+  padding: 0.5em 0;
+}
+.post-subtitle {
+  font-size: 14px;
+  font-weight: 400;
+  font-style: italic;
 }
 .post-date {
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 400;
 }
 .post-content {
-  font-size: 20px;
+  font-size: 14px;
 }
 </style>
