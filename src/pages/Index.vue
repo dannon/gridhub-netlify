@@ -2,7 +2,7 @@
   <Layout>
 
     <header class="header">
-      <h1 id="page-title">{{ $page.metadata.siteName }}</h1>
+      <h1 id="homepage-title">{{ $page.metadata.siteName }}</h1>
     </header>
 
     <section class="description">
@@ -88,9 +88,7 @@ query {
       node {
         id
         title
-        timeToRead
         tease
-        date (format: "D MMMM YYYY")
         path
       }
     }
@@ -99,7 +97,7 @@ query {
 </page-query>
 
 <style>
-#page-title {
+#homepage-title {
   font-size: 48px;
   font-weight: 300;
 }

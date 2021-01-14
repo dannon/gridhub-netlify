@@ -1,6 +1,6 @@
 <template>
-  <div class="post-list">
-    <h1 class="title"><g-link :to="post.path" class="read">{{ post.title }}</g-link></h1>
+  <div class="post-list-brief">
+    <h3 class="title"><g-link :to="post.path" class="read">{{ post.title }}</g-link></h3>
     <p class="description">{{ post.tease }}</p>
   </div>
 </template>
@@ -12,12 +12,8 @@ export default {
 </script>
 
 <style>
-.post-list {
+.post-list-brief {
   font-size: 14px;
   line-height: 1;
-}
-
-.post-list a {
-  text-decoration: none;
 }
 </style>

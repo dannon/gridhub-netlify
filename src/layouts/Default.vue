@@ -48,11 +48,9 @@ body {
   height: 65px;
   background-color: #2c3143;
 }
-
 #masthead-logo {
   height: 30px;
 }
-
 #masthead a {
   color: rgba(255, 255, 255, 0.5);
 }
@@ -66,9 +64,39 @@ body {
   margin-right: 40px;
 }
 
+h1 {
+  font-size: 1.75rem;
+  font-weight: 300;
+}
+h2 {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
 a {
   color: #2882dc;
   text-decoration: none;
   font-weight: normal;
+}
+
+table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+}
+table th, table td {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #bfbfbf;
+}
+table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #bfbfbf;
+}
+table tbody + tbody {
+  border-top: 2px solid #bfbfbf;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 </style>
