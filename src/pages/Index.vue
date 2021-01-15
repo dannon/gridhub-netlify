@@ -60,6 +60,9 @@ query {
   metadata {
     siteName
   }
+  #TODO: Filter directly on the `category` field.
+  #      Currently not possible due to this bug: https://github.com/gridsome/gridsome/issues/1196
+  #      Supposed to be fixed by Gridsome 1.0.
   news: allPost(filter: { path: { regex: "^/news/" }}) {
     totalCount
     edges {

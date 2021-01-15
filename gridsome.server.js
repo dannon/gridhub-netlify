@@ -5,10 +5,20 @@
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
-module.exports = function (api) {
-  api.loadSource(({ addCollection }) => {
+module.exports = function(api) {
+  api.loadSource(actions => {
     // Use the Data Store API here: https://gridsome.org/docs/data-store-api/
-  })
+    actions.addSchemaResolvers({
+      Post: {
+        category: {
+          type: 'String',
+          resolve(obj) {
+            return obj.path.split("/")[1];
+          }
+        }
+      }
+    });
+  });
 
   api.createPages(({ createPage }) => {
     // Use the Pages API here: https://gridsome.org/docs/pages-api/
