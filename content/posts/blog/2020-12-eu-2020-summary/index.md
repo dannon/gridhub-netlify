@@ -1,5 +1,4 @@
 ---
-category: blog
 title: "The European Galaxy Server in 2020"
 tease: "What a shitty year! But it’s over and we hope you and your family are safe and healthy."
 authors: "Beatriz Serrano-Solano, Björn Grüning"

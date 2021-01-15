@@ -1,5 +1,4 @@
 ---
-path: jxtx
 title: 'James Peter Taylor | 1979 - 2020'
 ---
 

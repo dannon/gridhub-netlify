@@ -1,5 +1,4 @@
 ---
-category: news
 title: "GCC2021 Training Topic Nominations are Open"
 tease: "The training topics at GCC2021 are determined BY YOU."
 external_url: ""

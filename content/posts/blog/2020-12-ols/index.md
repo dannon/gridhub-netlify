@@ -1,5 +1,4 @@
 ---
-category: blog
 title: "Open Life Science program & the Galaxy community"
 tease: " involvement in OLS-2 and invitation to apply to the next cohort"
 authors: "Beatriz Serrano-Solano, Muhammet Celik "

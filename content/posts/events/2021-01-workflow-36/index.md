@@ -1,5 +1,4 @@
 ---
-category: events
 title: "36th Workflow Meetup"
 date: '2021-01-18'
 days: 1

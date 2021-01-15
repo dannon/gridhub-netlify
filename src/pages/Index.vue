@@ -60,7 +60,7 @@ query {
   metadata {
     siteName
   }
-  news: allPost(filter: { category: { eq: "news" }}) {
+  news: allPost(filter: { path: { regex: "^/news/" }}) {
     totalCount
     edges {
       node {
@@ -71,7 +71,7 @@ query {
       }
     }
   }
-  events: allPost(filter: { category: { eq: "events" }}) {
+  events: allPost(filter: { path: { regex: "^/events/" }}) {
     totalCount
     edges {
       node {
@@ -82,7 +82,7 @@ query {
       }
     }
   }
-  blog: allPost(filter: { category: { eq: "blog" }}) {
+  blog: allPost(filter: { path: { regex: "^/blog/" }}) {
     totalCount
     edges {
       node {

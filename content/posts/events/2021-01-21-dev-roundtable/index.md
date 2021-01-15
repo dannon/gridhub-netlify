@@ -1,5 +1,4 @@
 ---
-category: events
 title: "Galaxy Developer Roundtable: FastAPI"
 date: 2021-01-21
 days: 1

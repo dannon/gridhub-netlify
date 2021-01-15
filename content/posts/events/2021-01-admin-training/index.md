@@ -1,5 +1,4 @@
 ---
-category: events
 title: "2021 Galaxy Admin Training"
 date: '2021-01-25'
 days: 5
