@@ -32,7 +32,7 @@ query {
   metadata {
     siteName
   }
-  allPost(filter: { path: { regex: "^/blog/" }}) {
+  allPost(filter: { category: { eq: "blog" }}) {
     totalCount
     edges {
       node {

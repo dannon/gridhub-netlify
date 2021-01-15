@@ -28,7 +28,7 @@ query {
   metadata {
     siteName
   }
-  allPost(filter: { path: { regex: "^/news/" }}) {
+  allPost(filter: { category: { eq: "news" }}) {
     totalCount
     edges {
       node {

@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <h1 id="page-title">Singlets</h1>
-    <p>Standalone pages not part of any series (collection).</p>
+    <p>Standalone pages not part of any series (<a href="https://gridsome.org/docs/collections/">collection</a>).</p>
     <table class="table-striped">
       <tbody>
         <PostTable v-for="edge in $page.allSinglet.edges" :key="edge.node.id" :post="edge.node" />

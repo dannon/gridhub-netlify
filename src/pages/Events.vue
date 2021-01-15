@@ -35,7 +35,7 @@ query {
   metadata {
     siteName
   }
-  allPost(filter: { path: { regex: "^/events/" }}) {
+  allPost(filter: { category: { eq: "events" }}) {
     totalCount
     edges {
       node {
