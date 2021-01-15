@@ -5,7 +5,7 @@
     <p>Welcome to the <em>Galactic Blog</em>, a list of Galaxy related blog posts from community members.  This blog contains longer form posts or pointers to longer form posts that are elsewhere on the web.</p>
     <p>The Galactic Blog complements the <g-link to="/news/">Galaxy News feed</g-link>.</p>
     <p> <strong>Add your voice!</strong></p>
-    <p>See the hub <g-link to="https://github.com/galaxyproject/galaxy-hub/tree/master/CONTRIBUTING.md">CONTRIBUTING page</g-link> in general, and the <g-link to="https://github.com/galaxyproject/galaxy-hub/blob/master/CONTRIBUTING.md#blog-metadata">blog section</g-link> in particular for directions on how to add a blog entry.</p>
+    <p>See the hub <a href="https://github.com/galaxyproject/galaxy-hub/tree/master/CONTRIBUTING.md">CONTRIBUTING page</a> in general, and the <a href="https://github.com/galaxyproject/galaxy-hub/blob/master/CONTRIBUTING.md#blog-metadata">blog section</a> in particular for directions on how to add a blog entry.</p>
     <h2 id="heres-what-people-are-saying">Here's what people are saying</h2>
     <table class="table-striped">
       <tbody>
