@@ -9,6 +9,7 @@ module.exports = {
   siteDescription: 'Galaxy Community Hub - Gridsome version',
   templates: {
     Post: '/:category/:title',
+    Singlet: '/:path',
   },
   plugins: [
     {
@@ -18,7 +19,15 @@ module.exports = {
         typeName: 'Post',
         route: '/posts/:slug',
       }
-    }
+    },
+    {
+      use: '@gridsome/source-filesystem',
+      options: {
+        path: 'content/singlets/**/*.md',
+        typeName: 'Singlet',
+        route: '/singlets/:slug',
+      }
+    },
   ],
   transformers: {
     // Add markdown support to all filesystem sources
