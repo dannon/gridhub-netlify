@@ -1,6 +1,5 @@
 <template>
   <Layout>
-    <br />
     <g-link to="/" class="link"> &larr; Home</g-link>
     <header class="post-header">
       <h1 class="post-title">{{ $page.post.title }}</h1>
@@ -24,6 +23,16 @@ query Post ($path: String!) {
   }
 }
 </page-query>
+
+<script>
+export default {
+  metaInfo() {
+    return {
+      title: this.$page.post.title
+    }
+  }
+}
+</script>
 
 <style>
 .post-title {

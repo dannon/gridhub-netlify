@@ -1,6 +1,5 @@
 <template>
   <Layout>
-    <br />
     <g-link to="/" class="link"> &larr; Home</g-link>
     <header class="singlet-header">
       <h1 class="singlet-title">{{ $page.singlet.title }}</h1>
@@ -20,6 +19,16 @@ query Singlet ($path: String!) {
   }
 }
 </page-query>
+
+<script>
+export default {
+  metaInfo() {
+    return {
+      title: this.$page.singlet.title
+    }
+  }
+}
+</script>
 
 <style>
 .singlet-title {
