@@ -5,6 +5,11 @@
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
+const LIST_METADATA = ['location', 'contact'];
+function split_list_string(string) {
+  return string.split(',').map(string => string.split("&")).flat().map(string => string.trim());
+}
+
 module.exports = function(api) {
   api.loadSource(actions => {
     // Use the Data Store API here: https://gridsome.org/docs/data-store-api/
@@ -25,6 +30,12 @@ module.exports = function(api) {
   // Populate the derived `category` field.
   api.onCreateNode(options => {
     if (options.internal.typeName === "Post") {
+      // Split comma (and ampersand) delimited metadata fields into arrays.
+      for (let key in options) {
+        if (LIST_METADATA.includes(key)) {
+          options[key] = split_list_string(options[key]);
+        }
+      }
       return {
         ...options,
         category: options.path.split("/")[1],
