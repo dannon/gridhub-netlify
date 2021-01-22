@@ -19,7 +19,7 @@ function rmPrefix(string, prefix, keep) {
 
 module.exports = {
   siteName: 'Galaxy Community Hub: The Squeakquel',
-  siteDescription: 'Galaxy Community Hub - Gridsome version',
+  siteDescription: 'All about Galaxy and its community',
   templates: {
     Post: node => rmPrefix(node.path, "/content/posts/", "/"),
     Singlet: node => rmPrefix(node.path, "/content/singlets/", "/"),
