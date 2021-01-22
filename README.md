@@ -1,14 +1,7 @@
-# Default starter for Gridsome
+# Community site prototype
 
-This is the project you get when you run `gridsome create new-project`.
+This is the framework.
 
-### 1. Install Gridsome CLI tool if you don't have
+Content is not included in this repo. It should go in a `content` directory in the root.
 
-`npm install --global @gridsome/cli`
-
-### 2. Create a Gridsome project
-
-1. `gridsome create my-gridsome-site` to install default starter
-2. `cd my-gridsome-site` to open the folder
-3. `gridsome develop` to start a local dev server at `http://localhost:8080`
-4. Happy coding 🎉🙌
+See the `content` directory of [`gridhub`](https://github.com/NickSto/galaxy-hub/tree/gridhub) branch of the `galaxy-hub` repo for how it should be laid out.
