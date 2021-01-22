@@ -1,8 +1,7 @@
 <template>
   <Layout>
-    <h1 id="page-title">Galaxy News</h1>
-    <p>This page contains announcements of interest to the Galaxy Community. These include items from the Galaxy Team or the Galaxy community and address anything that is of wide interest to the community.</p>
-    <p>Also see the <g-link to="/blog/">Galactic Blog</g-link> for more.</p>
+    <h1 class="page-title">{{ $page.index.title }}</h1>
+    <div v-html="$page.index.content" />
     <table class="table-striped">
       <tbody>
         <PostTable v-for="edge in $page.allPost.edges" :key="edge.node.id" :post="edge.node" />
@@ -17,16 +16,20 @@ export default {
   components: {
     PostTable,
   },
-  metaInfo: {
-    title: 'Galaxy News'
+  metaInfo() {
+    return {
+      title: this.$page.index.title
+    }
   }
 }
 </script>
 
 <page-query>
 query {
-  metadata {
-    siteName
+  index: post (path: "/news/__index__/") {
+    id
+    title
+    content
   }
   allPost(filter: { category: { eq: "news" }}) {
     totalCount

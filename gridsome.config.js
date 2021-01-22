@@ -16,13 +16,22 @@ function rmPrefix(string, prefix, keep) {
   }
   return output;
 }
+function filterIndices(level, path) {
+  let fields = path.split("/");
+  if (fields.length === level+2 && fields[0] === "" && fields[level+1] === "") {
+    // It's an index page.
+    return path+"__index__";
+  } else {
+    return path;
+  }
+}
 
 module.exports = {
   siteName: 'Galaxy Community Hub: The Squeakquel',
   siteDescription: 'All about Galaxy and its community',
   templates: {
-    Post: node => rmPrefix(node.path, "/content/posts/", "/"),
-    Standalone: node => rmPrefix(node.path, "/content/standalone/", "/"),
+    Post: node => filterIndices(1, rmPrefix(node.path, "/content/posts/", "/")),
+    Standalone: node => filterIndices(0, rmPrefix(node.path, "/content/standalone/", "/")),
   },
   plugins: [
     {
