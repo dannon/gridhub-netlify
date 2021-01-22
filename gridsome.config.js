@@ -22,7 +22,7 @@ module.exports = {
   siteDescription: 'All about Galaxy and its community',
   templates: {
     Post: node => rmPrefix(node.path, "/content/posts/", "/"),
-    Singlet: node => rmPrefix(node.path, "/content/singlets/", "/"),
+    Standalone: node => rmPrefix(node.path, "/content/standalone/", "/"),
   },
   plugins: [
     {
@@ -35,8 +35,8 @@ module.exports = {
     {
       use: '@gridsome/source-filesystem',
       options: {
-        path: 'content/singlets/**/index.md',
-        typeName: 'Singlet',
+        path: 'content/standalone/**/index.md',
+        typeName: 'Standalone',
       }
     },
   ],

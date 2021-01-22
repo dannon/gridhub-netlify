@@ -1,18 +1,18 @@
 <template>
   <Layout>
     <g-link to="/" class="link"> &larr; Home</g-link>
-    <header class="singlet-header">
-      <h1 class="singlet-title">{{ $page.singlet.title }}</h1>
+    <header class="standalone-header">
+      <h1 class="standalone-title">{{ $page.standalone.title }}</h1>
     </header>
-    <div class="singlet-content">
-      <p v-html="$page.singlet.content" />
+    <div class="standalone-content">
+      <p v-html="$page.standalone.content" />
     </div>
   </Layout>
 </template>
 
 <page-query>
-query Singlet ($path: String!) {
-   singlet: singlet (path: $path) {
+query Standalone ($path: String!) {
+   standalone: standalone (path: $path) {
     id
     title
     content
@@ -24,20 +24,20 @@ query Singlet ($path: String!) {
 export default {
   metaInfo() {
     return {
-      title: this.$page.singlet.title
+      title: this.$page.standalone.title
     }
   }
 }
 </script>
 
 <style>
-.singlet-title {
+.standalone-title {
   font-size: 28px;
   font-weight: 300;
   line-height: 1.4em;
   padding: 0.5em 0;
 }
-.singlet-content {
+.standalone-content {
   font-size: 14px;
 }
 </style>
