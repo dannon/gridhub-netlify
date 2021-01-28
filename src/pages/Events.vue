@@ -31,13 +31,14 @@ query {
     title
     content
   }
-  allPost(filter: { category: { eq: "events" }}) {
+  allPost(filter: { category: { eq: "events" }, index: { eq: false }, date: { ne: "" }}) {
     totalCount
     edges {
       node {
         id
         title
         tease
+        external_url
         date (format: "D MMMM YYYY")
         path
       }

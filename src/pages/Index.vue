@@ -48,6 +48,7 @@ query {
         id
         title
         tease
+        external_url
         path
       }
     }
@@ -59,6 +60,7 @@ query {
         id
         title
         tease
+        external_url
         path
       }
     }
@@ -70,6 +72,7 @@ query {
         id
         title
         tease
+        external_url
         path
       }
     }
