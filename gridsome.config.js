@@ -68,6 +68,13 @@ module.exports = {
         typeName: 'Insert',
       }
     },
+    {
+      use: '@gridsome/source-filesystem',
+      options: {
+        path: ['content/{posts,standalone}/**/*.md', '!content/{posts,standalone}/**/index.md'],
+        typeName: 'Insert',
+      }
+    },
   ],
   transformers: {
     // Add markdown support to all filesystem sources

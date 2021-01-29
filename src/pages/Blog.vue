@@ -7,6 +7,7 @@
         <PostTable v-for="edge in $page.allPost.edges" :key="edge.node.id" :post="edge.node" />
       </tbody>
     </table>
+    <footer class="page-footer" v-if="$page.footer" v-html="$page.footer.content" />
   </Layout>
 </template>
 
@@ -27,6 +28,11 @@ export default {
 <page-query>
 query {
   index: insert (path: "/insert:blog/index/") {
+    id
+    title
+    content
+  }
+  footer: insert (path: "/insert:blog/footer/") {
     id
     title
     content

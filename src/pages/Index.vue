@@ -16,9 +16,8 @@
       <PostListBrief v-for="edge in $page.blog.edges" :key="edge.node.id" :post="edge.node" />
     </section>
 
-    <footer class="acknowledgment">
-      The Galaxy Project is supported in part by NSF, NHGRI, The Huck Institutes of the Life Sciences, The Institute for CyberScience at Penn State, and Johns Hopkins University.
-    </footer>
+    <footer class="page-footer" v-if="$page.footer" v-html="$page.footer.content" />
+
   </Layout>
 </template>
 
@@ -37,6 +36,11 @@ export default {
 <page-query>
 query {
   index: insert (path: "/insert:index/") {
+    id
+    title
+    content
+  }
+  footer: insert (path: "/insert:footer/") {
     id
     title
     content

@@ -14,6 +14,7 @@
     </header>
     <section class="main">
       <slot/>
+      <footer class="static-footer" v-if="$static.footer" v-html="$static.footer.content" />
     </section>
   </div>
 </template>
@@ -22,6 +23,11 @@
 query {
   metadata {
     siteName
+  }
+  footer: insert (path: "/insert:site-footer/") {
+    id
+    title
+    content
   }
 }
 </static-query>
