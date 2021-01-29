@@ -6,46 +6,66 @@
 
 const slugify = string => string.toLowerCase().replace(/[^\w\d -]/g, '').replace(/[ -]+/g,'-');
 const ensurePrefix = (string, char) => string.startsWith(char) ? string : char+string;
-function rmPrefix(string, prefix, keep) {
-  let output = string;
-  if (string.startsWith(prefix)) {
-    output = string.slice(prefix.length);
+function rmPathPrefix(path, depth, absolute=null) {
+  let inputIsAbsolute = path.startsWith("/");
+  if (inputIsAbsolute) {
+    depth++;
   }
-  if (typeof keep !== 'undefined') {
-    output = ensurePrefix(output, keep);
+  if (absolute === null) {
+    absolute = inputIsAbsolute;
   }
-  return output;
-}
-function filterIndices(level, path) {
   let fields = path.split("/");
-  if (fields.length === level+2 && fields[0] === "" && fields[level+1] === "") {
-    // It's an index page.
-    return path+"__index__";
+  let newPath = fields.slice(depth).join("/");
+  if (absolute) {
+    return "/"+newPath;
   } else {
-    return path;
+    return newPath;
   }
+}
+function makeFilenamePath(prefix, node) {
+  let directory = rmPathPrefix(node.fileInfo.directory, 2, absolute=false);
+  let path;
+  if (directory === "") {
+    path = node.fileInfo.name;
+  } else {
+    path = [directory, node.fileInfo.name].join("/");
+  }
+  return `/${prefix}:${path}`;
+}
+function logAndReturn(...values) {
+  // console.log(values.join("\t"));
+  return values[values.length-1];
 }
 
 module.exports = {
   siteName: 'Galaxy Community Hub: The Squeakquel',
   siteDescription: 'All about Galaxy and its community',
   templates: {
-    Post: node => filterIndices(1, rmPrefix(node.path, "/content/posts/", "/")),
-    Standalone: node => filterIndices(0, rmPrefix(node.path, "/content/standalone/", "/")),
+    Post: node => logAndReturn("Post", rmPathPrefix(node.path, 2)),
+    Standalone: node => logAndReturn("Standalone", rmPathPrefix(node.path, 2)),
+    Insert: node => logAndReturn("Insert", makeFilenamePath("insert", node)),
   },
+  // Path globbing rules: https://www.npmjs.com/package/globby#user-content-globbing-patterns
   plugins: [
     {
       use: '@gridsome/source-filesystem',
       options: {
-        path: 'content/posts/**/index.md',
+        path: 'content/posts/*/*/**/index.md',
         typeName: 'Post',
       }
     },
     {
       use: '@gridsome/source-filesystem',
       options: {
-        path: 'content/standalone/**/index.md',
+        path: 'content/standalone/*/**/index.md',
         typeName: 'Standalone',
+      }
+    },
+    {
+      use: '@gridsome/source-filesystem',
+      options: {
+        path: ['content/posts/*/index.md', 'content/standalone/index.md'],
+        typeName: 'Insert',
       }
     },
   ],

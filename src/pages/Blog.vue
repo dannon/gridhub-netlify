@@ -26,12 +26,12 @@ export default {
 
 <page-query>
 query {
-  index: post (path: "/blog/__index__/") {
+  index: insert (path: "/insert:blog/index/") {
     id
     title
     content
   }
-  allPost(filter: { category: { eq: "blog" }, index: { eq: false }, date: { ne: "" }}) {
+  allPost(filter: { category: { eq: "blog" }, date: { ne: "" }}) {
     totalCount
     edges {
       node {

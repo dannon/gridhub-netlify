@@ -22,20 +22,16 @@ module.exports = function(api) {
      */
     actions.addSchemaTypes(`
       type Post implements Node @infer {
-        index: Boolean
         category: String
-      }
-    `);
-    actions.addSchemaTypes(`
-      type Standalone implements Node @infer {
-        index: Boolean
       }
     `);
   });
 
-  // Populate the derived `category` field.
+  // Populate the derived fields.
   api.onCreateNode(options => {
     let pathParts = options.path.split("/");
+    options.filename = options.fileInfo.name;
+    // Posts
     if (options.internal.typeName === "Post") {
       // Split comma (and ampersand) delimited metadata fields into arrays.
       for (let key in options) {
@@ -43,17 +39,9 @@ module.exports = function(api) {
           options[key] = split_list_string(options[key]);
         }
       }
-      return {
-        category: pathParts[1],
-        index: pathParts.length === 4 && pathParts[2] === "__index__",
-        ...options
-      };
-    } else if (options.internal.typeName === "Standalone") {
-      return {
-        index: pathParts.length === 3 && pathParts[1] === "__index__",
-        ...options
-      }
+      options.category = pathParts[1];
     }
+    return options;
   });
 
   api.createPages(({ createPage }) => {

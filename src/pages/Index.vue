@@ -36,7 +36,7 @@ export default {
 
 <page-query>
 query {
-  index: standalone (path: "/__index__/") {
+  index: insert (path: "/insert:index/") {
     id
     title
     content
