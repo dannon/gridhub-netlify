@@ -3,8 +3,15 @@
     <h1 class="page-title">{{ $page.index.title }}</h1>
     <div v-html="$page.index.content" />
     <table class="table-striped">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Author(s)</th>
+          <th>Topic</th>
+        </tr>
+      </thead>
       <tbody>
-        <PostTable v-for="edge in $page.allPost.edges" :key="edge.node.id" :post="edge.node" />
+        <PostTableBlog v-for="edge in $page.allPost.edges" :key="edge.node.id" :post="edge.node" />
       </tbody>
     </table>
     <footer class="page-footer" v-if="$page.footer" v-html="$page.footer.content" />
@@ -12,10 +19,10 @@
 </template>
 
 <script>
-import PostTable from '@/components/PostTable';
+import PostTableBlog from '@/components/PostTableBlog';
 export default {
   components: {
-    PostTable,
+    PostTableBlog,
   },
   metaInfo() {
     return {
@@ -44,8 +51,11 @@ query {
         id
         title
         tease
+        authors
+        source_blog
+        source_blog_url
         external_url
-        date (format: "D MMMM YYYY")
+        date (format: "D MMM YYYY")
         path
       }
     }

@@ -6,9 +6,6 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 const LIST_METADATA = ['location', 'contact'];
-function split_list_string(string) {
-  return string.split(',').map(string => string.split("&")).flat().map(string => string.trim());
-}
 
 module.exports = function(api) {
   api.loadSource(actions => {
@@ -36,7 +33,7 @@ module.exports = function(api) {
       // Split comma (and ampersand) delimited metadata fields into arrays.
       for (let key in options) {
         if (LIST_METADATA.includes(key) && options[key] !== null) {
-          options[key] = split_list_string(options[key]);
+          options[key] = options[key].split(',').map(string => string.trim());
         }
       }
       options.category = pathParts[1];

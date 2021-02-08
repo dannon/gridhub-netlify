@@ -105,4 +105,8 @@ table tbody + tbody {
 .table-striped tbody tr:nth-of-type(odd) {
   background-color: rgba(0, 0, 0, 0.05);
 }
+
+.float-right {
+  float: right;
+}
 </style>

@@ -45,7 +45,7 @@ query {
     title
     content
   }
-  news: allPost(perPage: 3, filter: { category: { eq: "news" }}) {
+  news: allPost(limit: 3, filter: { category: { eq: "news" }}) {
     totalCount
     edges {
       node {
@@ -57,7 +57,7 @@ query {
       }
     }
   }
-  events: allPost(perPage: 5, filter: { category: { eq: "events" }}) {
+  events: allPost(limit: 5, sortBy: "date", order: ASC, filter: { category: { eq: "events" }}) {
     totalCount
     edges {
       node {
@@ -69,7 +69,7 @@ query {
       }
     }
   }
-  blog: allPost(perPage: 2, filter: { category: { eq: "blog" }}) {
+  blog: allPost(limit: 2, filter: { category: { eq: "blog" }}) {
     totalCount
     edges {
       node {
