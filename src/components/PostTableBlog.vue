@@ -18,7 +18,6 @@
         {{ post.tease }}
       </p>
     </td>
-    </td>
   </tr>
 </template>
 

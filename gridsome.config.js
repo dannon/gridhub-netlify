@@ -80,8 +80,10 @@ module.exports = {
     // Add markdown support to all filesystem sources
     remark: {
       externalLinksTarget: '_blank',
-      externalLinksRel: ['nofollow', 'noopener', 'noreferrer'],
-      plugins: [],
+      externalLinksRel: ['noopener', 'noreferrer'],
+      slug: true,
+      autolinkHeadings: true,
+      plugins: ['remark-attr'],
     }
   },
 }
