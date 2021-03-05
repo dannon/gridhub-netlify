@@ -2,18 +2,28 @@
   <Layout>
 
     <header class="header">
-      <h1 id="homepage-title">{{ $page.index.title }}</h1>
+      <h1 class="display-4">{{ $page.index.title }}</h1>
     </header>
 
-    <section class="description" v-html="$page.index.content" />
+    <section class="section-content">
+      <div id="splash-row">
+        <div class="col-sm-12" v-html="$page.index.content" />
+      </div>
 
-    <section class="posts">
-      <h2><g-link to="/news/">News</g-link></h2>
-      <PostListBrief v-for="edge in $page.news.edges" :key="edge.node.id" :post="edge.node" />
-      <h2><g-link to="/events/">Events</g-link></h2>
-      <PostListBrief v-for="edge in $page.events.edges" :key="edge.node.id" :post="edge.node" />
-      <h2><g-link to="/blog/">Blog</g-link></h2>
-      <PostListBrief v-for="edge in $page.blog.edges" :key="edge.node.id" :post="edge.node" />
+      <div class="row">
+        <div class="col-sm-4">
+          <h2><g-link to="/news/">News</g-link></h2>
+          <PostListBrief v-for="edge in $page.news.edges" :key="edge.node.id" :post="edge.node" />
+        </div>
+        <div class="col-sm-4">
+          <h2><g-link to="/events/">Events</g-link></h2>
+          <PostListBrief v-for="edge in $page.events.edges" :key="edge.node.id" :post="edge.node" />
+        </div>
+        <div class="col-sm-4">
+          <h2><g-link to="/blog/">Blog</g-link></h2>
+          <PostListBrief v-for="edge in $page.blog.edges" :key="edge.node.id" :post="edge.node" />
+        </div>
+      </div>
     </section>
 
     <footer class="page-footer" v-if="$page.footer" v-html="$page.footer.content" />
@@ -83,14 +93,3 @@ query {
   }
 }
 </page-query>
-
-<style>
-#homepage-title {
-  font-size: 48px;
-  font-weight: 300;
-}
-footer {
-  margin-top: 20px;
-  font-size: 85%;
-}
-</style>

@@ -2,7 +2,7 @@
   <Layout>
     <h1 class="page-title">{{ $page.index.title }}</h1>
     <div v-html="$page.index.content" />
-    <table class="table-striped">
+    <table class="table table-striped">
       <tbody>
         <PostTable v-for="edge in $page.allPost.edges" :key="edge.node.id" :post="edge.node" />
       </tbody>

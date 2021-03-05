@@ -1,5 +1,5 @@
 <template>
-  <tr class="postTableEvents-table" v-if="post.date">
+  <tr class="postTableEvents" v-if="post.date">
     <td class="date">{{ post.date }}</td>
     <td class="title">
       <a v-if="post.external_url" :href="post.external_url">{{ post.title }}</a>
@@ -27,13 +27,7 @@ export default {
 </script>
 
 <style>
-.postTableEvents-table .tease {
-  font-size: 80%;
-}
-.postTableEvents-table .location, .postTableEvents-table .contact {
-  font-size: 90%;
-}
-.postTableEvents-table .gtn-icon {
+.postTableEvents .gtn-icon {
   float: right;
 }
 </style>

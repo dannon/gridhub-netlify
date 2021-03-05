@@ -3,7 +3,7 @@
     <h1 class="page-title">{{ $page.index.title }}</h1>
     <div v-html="$page.index.content" />
     <h2 id="upcoming-events">Upcoming Events</h2>
-    <table class="table-striped">
+    <table class="table table-striped">
       <thead>
         <tr>
           <th>Date</th>

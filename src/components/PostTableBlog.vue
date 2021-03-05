@@ -1,9 +1,9 @@
 <template>
-  <tr class="postTableBlog-table">
+  <tr class="postTableBlog">
     <td class="date">{{ post.date }}</td>
     <td class="title">
       {{ post.authors }}
-      <p class="postTableBlog-from">
+      <p class="from">
         from
         <a v-if="post.source_blog_url" :href="post.source_blog_url">{{ post.source_blog }}</a>
         <template v-else>
@@ -28,10 +28,8 @@ export default {
 </script>
 
 <style>
-.postTableBlog-table .tease {
-  font-size: 80%;
-}
-.postTableBlog-from {
+.postTableBlog .from {
   font-style: italic;
+  margin-left: 1em;
 }
 </style>
