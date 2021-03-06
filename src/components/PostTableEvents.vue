@@ -7,7 +7,7 @@
       <p class="tease">{{ post.tease }}</p>
     </td>
     <td class="location">
-      <g-image v-if="post.continent" class="continent float-right" :src="`/images/icons/${post.continent}.png`"/>
+      <Continent :continent="post.continent" />
       <a v-if="post.location_url" :href="post.location_url">{{ post.location }}</a>
       <template v-else>{{ post.location }}</template>
     </td>
@@ -21,7 +21,11 @@
 </template>
 
 <script>
+import Continent from '@/components/Continent';
 export default {
+  components: {
+    Continent,
+  },
   props: ["post"],
 };
 </script>
