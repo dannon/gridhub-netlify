@@ -2,9 +2,9 @@
 
 This repository contains the framework - the code that generates the site.
 
-It contains no content. To add content, clone this, then create a `content` directory in the root. All your Markdown files go in there.
+It contains no content. To add content, clone this, then create a `content` directory in the root. All your Markdown files go in there. For images and other static files, create a `static` directory in the root and put them there.
 
-## Creating static content
+## Creating static pages
 
 To see an example of how the files are organized, see the [`content`](https://github.com/NickSto/galaxy-hub/tree/gridhub/content) directory of [`gridhub`](https://github.com/NickSto/galaxy-hub/tree/gridhub) branch of [`galaxy-hub`](https://github.com/galaxyproject/galaxy-hub).
 
