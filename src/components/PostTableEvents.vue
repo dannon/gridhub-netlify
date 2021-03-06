@@ -8,14 +8,14 @@
     </td>
     <td class="location">
       <g-image v-if="post.continent" class="continent float-right" :src="`/images/icons/${post.continent}.png`"/>
-      <a v-if="post.location_url" :href="post.location_url">{{ post.location.join(", ") }}</a>
-      <template v-else>{{ post.location.join(", ") }}</template>
+      <a v-if="post.location_url" :href="post.location_url">{{ post.location }}</a>
+      <template v-else>{{ post.location }}</template>
     </td>
     <td class="contact">
       <a v-if="post.gtn" href="https://training.galaxyproject.org/">
         <g-image class="gtn-icon" src="/images/galaxy-logos/GTN16.png" alt="Training offered by GTN Member" title="Training offered by GTN Member"/>
       </a>
-      {{ post.contact.join(", ") }}
+      {{ post.contact }}
     </td>
   </tr>
 </template>
