@@ -1,10 +1,10 @@
 <template>
   <Layout>
     <g-link to="/" class="link"> &larr; Home</g-link>
-    <header class="standalone-header">
-      <h1 class="standalone-title">{{ $page.standalone.title }}</h1>
+    <header class="header">
+      <h1 class="title">{{ $page.standalone.title }}</h1>
     </header>
-    <div class="standalone-content">
+    <div class="content">
       <p v-html="$page.standalone.content" />
     </div>
   </Layout>
@@ -30,14 +30,14 @@ export default {
 }
 </script>
 
-<style>
-.standalone-title {
+<style scoped>
+.title {
   font-size: 28px;
   font-weight: 300;
   line-height: 1.4em;
   padding: 0.5em 0;
 }
-.standalone-content {
+.content {
   font-size: 14px;
 }
 </style>

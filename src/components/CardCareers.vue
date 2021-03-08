@@ -1,5 +1,5 @@
 <template>
-  <div class="cardCareersComponent card border-info">
+  <div class="card border-info">
     <div class="card-header">
       <Continent :continent="post.continent" />
       <a :href="post.external_url">{{ post.title }}</a>
@@ -38,15 +38,15 @@ export default {
 };
 </script>
 
-<style>
-.cardCareersComponent.card {
+<style scoped>
+.card {
   min-width: 14rem;
   max-width: 20rem;
 }
-.cardCareersComponent .location, .cardCareersComponent .posted {
+.location, .posted {
   font-weight: bolder;
 }
-.careerCardComponent .contact {
+.contact {
   font-style: italic;
 }
 </style>

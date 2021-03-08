@@ -20,7 +20,7 @@
   </tr>
 </template>
 
-<script>
+<script scoped>
 import Continent from '@/components/Continent';
 export default {
   components: {
@@ -30,8 +30,8 @@ export default {
 };
 </script>
 
-<style>
-.postTableEvents .gtn-icon {
+<style scoped>
+.gtn-icon {
   float: right;
 }
 </style>

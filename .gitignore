@@ -1,4 +1,5 @@
 content
+static
 *.log
 .cache
 .DS_Store

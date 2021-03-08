@@ -27,8 +27,8 @@ export default {
 };
 </script>
 
-<style>
-.postTableBlog .from {
+<style scoped>
+.from {
   font-style: italic;
   margin-left: 1em;
 }
