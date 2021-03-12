@@ -31,3 +31,9 @@ query {
   }
 }
 </static-query>
+
+<style>
+.text-nowrap {
+  white-space: nowrap !important;
+}
+</style>

@@ -14,9 +14,3 @@ export default {
   props: ["post"],
 };
 </script>
-
-<style scoped>
-.text-nowrap {
-  white-space: nowrap !important;
-}
-</style>
