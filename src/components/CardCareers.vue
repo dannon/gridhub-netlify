@@ -14,9 +14,7 @@
         Apply by: {{ post.closes }}
       </span>
     </p>
-    <p>
-      {{ post.summary }}
-    </p>
+    <span v-html="summary" />
     <p v-if="post.contact" class="contact">
       Contact: {{ post.contact }}
     </p>
@@ -30,11 +28,24 @@
 
 <script>
 import Continent from '@/components/Continent';
+const remark = require('remark');
+const remarkHtml = require('remark-html');
 export default {
   components: {
     Continent,
   },
   props: ["post"],
+  data() {
+    let data = {};
+    remark().use(remarkHtml).process(this.post.summary, (err, file) => {
+      if (err) {
+        console.error(err);
+      } else {
+        data.summary = String(file);
+      }
+    });
+    return data;
+  }
 };
 </script>
 
