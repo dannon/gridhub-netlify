@@ -5,9 +5,14 @@
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
+function dateToStr(date) {
+  // Turn a `Date` object into a string like "2021-03-12".
+  return date.toISOString().slice(0,10);
+}
+
 module.exports = function(api) {
   api.loadSource(actions => {
-    // Use the Data Store API here: https://gridsome.org/docs/data-store-api/
+    // Using the Data Store API: https://gridsome.org/docs/data-store-api/
     // Add derived `category` field.
     /*TODO: Replace this and the later api.onCreateNode() call with this technique instead:
      *      https://gridsome.org/docs/schema-api/#add-a-new-field-with-a-custom-resolver
@@ -34,6 +39,18 @@ module.exports = function(api) {
   });
 
   api.createPages(({ createPage }) => {
-    // Use the Pages API here: https://gridsome.org/docs/pages-api/
+    // Using the Pages API: https://gridsome.org/docs/pages-api/
+    const now = new Date();
+    const oneYearAgo = new Date(now.getFullYear()-1, now.getMonth(), now.getDate());
+    const todayStr = dateToStr(now);
+    const oneYearAgoStr = dateToStr(oneYearAgo);
+    createPage({
+      path: '/events/',
+      component: './src/pages/_virtual/Events.vue',
+      context: {
+        today: todayStr,
+        oneYearAgo: oneYearAgoStr,
+      }
+    })
   })
 }
