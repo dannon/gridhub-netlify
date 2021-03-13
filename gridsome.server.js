@@ -52,5 +52,12 @@ module.exports = function(api) {
         oneYearAgo: oneYearAgoStr,
       }
     })
+    createPage({
+      path: '/events/archive/',
+      component: './src/pages/_virtual/EventsArchive.vue',
+      context: {
+        today: todayStr,
+      }
+    })
   })
 }
