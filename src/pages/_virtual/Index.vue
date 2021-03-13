@@ -44,7 +44,7 @@ export default {
 </script>
 
 <page-query>
-query {
+query ($today: Date!) {
   main: insert (path: "/insert:main/") {
     id
     title
@@ -55,7 +55,7 @@ query {
     title
     content
   }
-  news: allPost(limit: 3, filter: { category: { eq: "news" }}) {
+  news: allPost(limit: 5, filter: { category: { eq: "news" }}) {
     totalCount
     edges {
       node {
@@ -67,7 +67,10 @@ query {
       }
     }
   }
-  events: allPost(limit: 5, sortBy: "date", order: ASC, filter: { category: { eq: "events" }}) {
+  events: allPost(
+      limit: 5, sortBy: "date", order: ASC,
+      filter: { category: { eq: "events" }, date: { gte: $today } }
+    ) {
     totalCount
     edges {
       node {
@@ -79,7 +82,7 @@ query {
       }
     }
   }
-  blog: allPost(limit: 2, filter: { category: { eq: "blog" }}) {
+  blog: allPost(limit: 5, filter: { category: { eq: "blog" }}) {
     totalCount
     edges {
       node {

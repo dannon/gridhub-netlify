@@ -45,19 +45,26 @@ module.exports = function(api) {
     const todayStr = dateToStr(now);
     const oneYearAgoStr = dateToStr(oneYearAgo);
     createPage({
+      path: '/',
+      component: './src/pages/_virtual/Index.vue',
+      context: {
+        today: todayStr,
+      }
+    });
+    createPage({
       path: '/events/',
       component: './src/pages/_virtual/Events.vue',
       context: {
         today: todayStr,
         oneYearAgo: oneYearAgoStr,
       }
-    })
+    });
     createPage({
       path: '/events/archive/',
       component: './src/pages/_virtual/EventsArchive.vue',
       context: {
         today: todayStr,
       }
-    })
+    });
   })
 }
