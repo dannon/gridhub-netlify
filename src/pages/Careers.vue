@@ -1,7 +1,7 @@
 <template>
   <Layout>
-    <h1 class="page-title">{{ $page.index.title }}</h1>
-    <div v-html="$page.index.content" />
+    <h1 class="page-title">{{ $page.main.title }}</h1>
+    <div v-html="$page.main.content" />
     <h2 id="open-positions">Open Positions</h2>
     <div class="card-deck">
       <CardCareers v-for="edge in $page.allPost.edges" :key="edge.node.id" :post="edge.node" />
@@ -18,7 +18,7 @@ export default {
   },
   metaInfo() {
     return {
-      title: this.$page.index.title
+      title: this.$page.main.title
     }
   }
 }
@@ -26,7 +26,7 @@ export default {
 
 <page-query>
 query {
-  index: insert (path: "/insert:careers/index/") {
+  main: insert (path: "/insert:careers/main/") {
     id
     title
     content

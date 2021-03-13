@@ -1,7 +1,7 @@
 <template>
   <Layout>
-    <h1 class="page-title">{{ $page.index.title }}</h1>
-    <div v-html="$page.index.content" />
+    <h1 class="page-title">{{ $page.main.title }}</h1>
+    <div v-html="$page.main.content" />
     <table class="table table-striped">
       <tbody>
         <PostTable v-for="edge in $page.allPost.edges" :key="edge.node.id" :post="edge.node" />
@@ -19,7 +19,7 @@ export default {
   },
   metaInfo() {
     return {
-      title: this.$page.index.title
+      title: this.$page.main.title
     }
   }
 }
@@ -27,7 +27,7 @@ export default {
 
 <page-query>
 query {
-  index: insert (path: "/insert:news/index/") {
+  main: insert (path: "/insert:news/main/") {
     id
     title
     content

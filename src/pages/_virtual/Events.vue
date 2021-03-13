@@ -1,7 +1,7 @@
 <template>
   <Layout>
-    <h1 class="page-title">{{ $page.index.title }}</h1>
-    <div v-html="$page.index.content" />
+    <h1 class="page-title">{{ $page.main.title }}</h1>
+    <div v-html="$page.main.content" />
     <h2 id="upcoming-events">Upcoming Events</h2>
     <table class="table table-striped">
       <thead>
@@ -43,7 +43,7 @@ export default {
   },
   metaInfo() {
     return {
-      title: this.$page.index.title
+      title: this.$page.main.title
     }
   }
 }
@@ -51,7 +51,7 @@ export default {
 
 <page-query>
 query ($today: Date!, $oneYearAgo: Date!) {
-  index: insert (path: "/insert:events/index/") {
+  main: insert (path: "/insert:events/main/") {
     id
     title
     content

@@ -1,7 +1,7 @@
 <template>
   <Layout>
-    <h1 class="page-title">{{ $page.index.title }}</h1>
-    <div v-html="$page.index.content" />
+    <h1 class="page-title">{{ $page.main.title }}</h1>
+    <div v-html="$page.main.content" />
     <table class="table table-striped">
       <thead>
         <tr>
@@ -26,7 +26,7 @@ export default {
   },
   metaInfo() {
     return {
-      title: this.$page.index.title
+      title: this.$page.main.title
     }
   }
 }
@@ -34,7 +34,7 @@ export default {
 
 <page-query>
 query {
-  index: insert (path: "/insert:blog/index/") {
+  main: insert (path: "/insert:blog/main/") {
     id
     title
     content

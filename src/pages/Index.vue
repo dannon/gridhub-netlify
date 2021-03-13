@@ -2,12 +2,12 @@
   <Layout>
 
     <header class="header">
-      <h1 class="display-4">{{ $page.index.title }}</h1>
+      <h1 class="display-4">{{ $page.main.title }}</h1>
     </header>
 
     <section class="section-content">
       <div id="splash-row">
-        <div class="col-sm-12" v-html="$page.index.content" />
+        <div class="col-sm-12" v-html="$page.main.content" />
       </div>
 
       <div class="row">
@@ -45,7 +45,7 @@ export default {
 
 <page-query>
 query {
-  index: insert (path: "/insert:index/") {
+  main: insert (path: "/insert:main/") {
     id
     title
     content

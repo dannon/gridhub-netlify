@@ -64,14 +64,7 @@ module.exports = {
     {
       use: '@gridsome/source-filesystem',
       options: {
-        path: ['content/posts/*/index.md', 'content/standalone/index.md'],
-        typeName: 'Insert',
-      }
-    },
-    {
-      use: '@gridsome/source-filesystem',
-      options: {
-        path: ['content/{posts,standalone}/**/*.md', '!content/{posts,standalone}/**/index.md'],
+        path: 'content/inserts/**/*.md',
         typeName: 'Insert',
       }
     },
