@@ -1,6 +1,6 @@
 <template>
-  <tr class="articleTableBlog">
-    <td class="date">{{ article.date }}</td>
+  <tr>
+    <td class="date text-nowrap">{{ article.date }}</td>
     <td class="title">
       {{ article.authors }}
       <p class="from">

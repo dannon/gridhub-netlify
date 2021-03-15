@@ -1,5 +1,5 @@
 <template>
-  <tr class="articleTableEvents">
+  <tr>
     <td class="date text-nowrap">{{ article.date }}</td>
     <td class="title">
       <a v-if="article.external_url" :href="article.external_url">{{ article.title }}</a>
