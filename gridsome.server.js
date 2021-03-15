@@ -80,14 +80,14 @@ module.exports = function(api) {
     const oneYearAgoStr = dateToStr(oneYearAgo);
     createPage({
       path: '/',
-      component: './src/pages/_virtual/Index.vue',
+      component: './src/pages/_mediated/Index.vue',
       context: {
         today: todayStr,
       }
     });
     createPage({
       path: '/events/',
-      component: './src/pages/_virtual/Events.vue',
+      component: './src/pages/_mediated/Events.vue',
       context: {
         today: todayStr,
         oneYearAgo: oneYearAgoStr,
@@ -95,7 +95,7 @@ module.exports = function(api) {
     });
     createPage({
       path: '/events/archive/',
-      component: './src/pages/_virtual/EventsArchive.vue',
+      component: './src/pages/_mediated/EventsArchive.vue',
       context: {
         today: todayStr,
       }
