@@ -11,7 +11,7 @@
         </tr>
       </thead>
       <tbody>
-        <PostTableBlog v-for="edge in $page.allPost.edges" :key="edge.node.id" :post="edge.node" />
+        <ArticleTableBlog v-for="edge in $page.articles.edges" :key="edge.node.id" :article="edge.node" />
       </tbody>
     </table>
     <footer class="page-footer" v-if="$page.footer" v-html="$page.footer.content" />
@@ -19,10 +19,10 @@
 </template>
 
 <script>
-import PostTableBlog from '@/components/PostTableBlog';
+import ArticleTableBlog from '@/components/ArticleTableBlog';
 export default {
   components: {
-    PostTableBlog,
+    ArticleTableBlog,
   },
   metaInfo() {
     return {
@@ -44,7 +44,7 @@ query {
     title
     content
   }
-  allPost(filter: { category: { eq: "blog" }, date: { ne: "" }}) {
+  articles: allArticle(filter: { category: { eq: "blog" }, date: { ne: "" }}) {
     totalCount
     edges {
       node {

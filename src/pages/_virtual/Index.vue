@@ -13,15 +13,15 @@
       <div class="row">
         <div class="col-sm-4">
           <h2><g-link to="/news/">News</g-link></h2>
-          <PostListBrief v-for="edge in $page.news.edges" :key="edge.node.id" :post="edge.node" />
+          <ArticleListBrief v-for="edge in $page.news.edges" :key="edge.node.id" :article="edge.node" />
         </div>
         <div class="col-sm-4">
           <h2><g-link to="/events/">Events</g-link></h2>
-          <PostListBrief v-for="edge in $page.events.edges" :key="edge.node.id" :post="edge.node" />
+          <ArticleListBrief v-for="edge in $page.events.edges" :key="edge.node.id" :article="edge.node" />
         </div>
         <div class="col-sm-4">
           <h2><g-link to="/blog/">Blog</g-link></h2>
-          <PostListBrief v-for="edge in $page.blog.edges" :key="edge.node.id" :post="edge.node" />
+          <ArticleListBrief v-for="edge in $page.blog.edges" :key="edge.node.id" :article="edge.node" />
         </div>
       </div>
     </section>
@@ -32,10 +32,10 @@
 </template>
 
 <script>
-import PostListBrief from '@/components/PostListBrief';
+import ArticleListBrief from '@/components/ArticleListBrief';
 export default {
   components: {
-    PostListBrief,
+    ArticleListBrief,
   },
   metaInfo: {
     title: 'Home',
@@ -55,7 +55,7 @@ query ($today: Date!) {
     title
     content
   }
-  news: allPost(limit: 5, filter: { category: { eq: "news" }}) {
+  news: allArticle(limit: 5, filter: { category: { eq: "news" }}) {
     totalCount
     edges {
       node {
@@ -67,7 +67,7 @@ query ($today: Date!) {
       }
     }
   }
-  events: allPost(
+  events: allArticle(
       limit: 5, sortBy: "date", order: ASC,
       filter: { category: { eq: "events" }, date: { gte: $today } }
     ) {
@@ -82,7 +82,7 @@ query ($today: Date!) {
       }
     }
   }
-  blog: allPost(limit: 5, filter: { category: { eq: "blog" }}) {
+  blog: allArticle(limit: 5, filter: { category: { eq: "blog" }}) {
     totalCount
     edges {
       node {

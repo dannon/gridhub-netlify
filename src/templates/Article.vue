@@ -2,26 +2,22 @@
   <Layout>
     <g-link to="/" class="link"> &larr; Home</g-link>
     <header>
-      <h1 class="title">{{ $page.post.title }}</h1>
+      <h1 class="title">{{ $page.article.title }}</h1>
       <div class="metadata">
-        <p class="subtitle">{{ $page.post.tease }}</p>
-        <div class="contact" v-if="$page.post.contact.length > 0">Contact:
-          <span v-for="(contact, index) in $page.post.contact" :key="contact">
-            {{ contact }}<template v-if="index < $page.post.contact.length-1">,</template>
-          </span>
+        <p class="subtitle" v-if="$page.article.tease">{{ $page.article.tease }}</p>
+        <div class="contact" v-if="$page.article.contact">
+          Contact: {{ $page.article.contact }}
         </div>
-        <p class="date">{{ $page.post.date }}</p>
+        <p class="date" v-if="$page.article.date">{{ $page.article.date }}</p>
       </div>
     </header>
-    <div class="content">
-      <p v-html="$page.post.content" />
-    </div>
+    <div class="content" v-html="$page.article.content" />
   </Layout>
 </template>
 
 <page-query>
-query Post ($path: String!) {
-   post: post (path: $path) {
+query Article ($path: String!) {
+   article: article (path: $path) {
     id
     title
     tease
@@ -36,7 +32,7 @@ query Post ($path: String!) {
 export default {
   metaInfo() {
     return {
-      title: this.$page.post.title
+      title: this.$page.article.title
     }
   }
 }

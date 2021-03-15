@@ -4,7 +4,7 @@
     <div v-html="$page.main.content" />
     <h2 id="open-positions">Open Positions</h2>
     <div class="card-deck">
-      <CardCareers v-for="edge in $page.allPost.edges" :key="edge.node.id" :post="edge.node" />
+      <CardCareers v-for="edge in $page.articles.edges" :key="edge.node.id" :article="edge.node" />
     </div>
     <footer class="page-footer" v-if="$page.footer" v-html="$page.footer.content" />
   </Layout>
@@ -36,7 +36,7 @@ query {
     title
     content
   }
-  allPost(filter: { category: { eq: "careers" }, date: { ne: "" }}) {
+  articles: allArticle(filter: { category: { eq: "careers" }, date: { ne: "" }}) {
     totalCount
     edges {
       node {

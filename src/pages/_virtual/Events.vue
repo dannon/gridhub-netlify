@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <PostTableEvents v-for="edge in $page.upcoming.edges" :key="edge.node.id" :post="edge.node" />
+        <ArticleTableEvents v-for="edge in $page.upcoming.edges" :key="edge.node.id" :article="edge.node" />
       </tbody>
     </table>
     <h2 id="recent-events">Recent Events</h2>
@@ -28,7 +28,7 @@
         </tr>
       </thead>
       <tbody>
-        <PostTableEvents v-for="edge in $page.recent.edges" :key="edge.node.id" :post="edge.node" />
+        <ArticleTableEvents v-for="edge in $page.recent.edges" :key="edge.node.id" :article="edge.node" />
       </tbody>
     </table>
     <footer class="page-footer" v-if="$page.footer" v-html="$page.footer.content" />
@@ -36,10 +36,10 @@
 </template>
 
 <script>
-import PostTableEvents from '@/components/PostTableEvents';
+import ArticleTableEvents from '@/components/ArticleTableEvents';
 export default {
   components: {
-    PostTableEvents,
+    ArticleTableEvents,
   },
   metaInfo() {
     return {
@@ -61,7 +61,7 @@ query ($today: Date!, $oneYearAgo: Date!) {
     title
     content
   }
-  upcoming: allPost(
+  upcoming: allArticle(
       sortBy: "date", order: ASC, filter: {
         category: { eq: "events" }, date: { gte: $today }
       }
@@ -83,7 +83,7 @@ query ($today: Date!, $oneYearAgo: Date!) {
       }
     }
   }
-  recent: allPost(
+  recent: allArticle(
       sortBy: "date", order: DESC, filter: {
         category: { eq: "events" }, date: { between: [$oneYearAgo, $today] }
       }

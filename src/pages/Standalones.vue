@@ -4,17 +4,17 @@
     <p>Standalone pages not part of any series (<a href="https://gridsome.org/docs/collections/">collection</a>).</p>
     <table class="table-striped">
       <tbody>
-        <PostTable v-for="edge in $page.allStandalone.edges" :key="edge.node.id" :post="edge.node" />
+        <ArticleTable v-for="edge in $page.allArticle.edges" :key="edge.node.id" :article="edge.node" />
       </tbody>
     </table>
   </Layout>
 </template>
 
 <script>
-import PostTable from '@/components/PostTable';
+import ArticleTable from '@/components/ArticleTable';
 export default {
   components: {
-    PostTable,
+    ArticleTable,
   },
   metaInfo: {
     title: 'Standalones'
@@ -27,7 +27,7 @@ query {
   metadata {
     siteName
   }
-  allStandalone {
+  allArticle(filter: {category: { eq: ""}}) {
     totalCount
     edges {
       node {

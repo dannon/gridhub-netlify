@@ -4,7 +4,7 @@
     <div v-html="$page.main.content" />
     <table class="table table-striped">
       <tbody>
-        <PostTable v-for="edge in $page.allPost.edges" :key="edge.node.id" :post="edge.node" />
+        <ArticleTable v-for="edge in $page.articles.edges" :key="edge.node.id" :article="edge.node" />
       </tbody>
     </table>
     <footer class="page-footer" v-if="$page.footer" v-html="$page.footer.content" />
@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import PostTable from '@/components/PostTable';
+import ArticleTable from '@/components/ArticleTable';
 export default {
   components: {
-    PostTable,
+    ArticleTable,
   },
   metaInfo() {
     return {
@@ -27,17 +27,17 @@ export default {
 
 <page-query>
 query {
-  main: insert (path: "/insert:news/main/") {
+  main: insert(path: "/insert:news/main/") {
     id
     title
     content
   }
-  footer: insert (path: "/insert:news/footer/") {
+  footer: insert(path: "/insert:news/footer/") {
     id
     title
     content
   }
-  allPost(filter: { category: { eq: "news" }, date: { ne: "" }}) {
+  articles: allArticle(filter: { category: { eq: "news" }, date: { ne: "" }}) {
     totalCount
     edges {
       node {

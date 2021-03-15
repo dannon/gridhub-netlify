@@ -1,26 +1,26 @@
 <template>
   <div class="card border-info">
     <div class="card-header">
-      <Continent :continent="post.continent" />
-      <a :href="post.external_url">{{ post.title }}</a>
+      <Continent :continent="article.continent" />
+      <a :href="article.external_url">{{ article.title }}</a>
     </div>
     <p class="location">
-      <a :href="post.location_url">{{ post.location }}</a>
+      <a :href="article.location_url">{{ article.location }}</a>
     </p>
     <p class="posted">
-      Posted: {{ post.date }}
+      Posted: {{ article.date }}
       <br>
-      <span v-if="post.closes" class="text-warning">
-        Apply by: {{ post.closes }}
+      <span v-if="article.closes" class="text-warning">
+        Apply by: {{ article.closes }}
       </span>
     </p>
     <span v-html="summary" />
-    <p v-if="post.contact" class="contact">
-      Contact: {{ post.contact }}
+    <p v-if="article.contact" class="contact">
+      Contact: {{ article.contact }}
     </p>
-    <p v-if="post.image">
-      <a :href="post.external_url">
-        <g-image class="card-img-bottom" :src="post.image.replace('/src', '')" />
+    <p v-if="article.image">
+      <a :href="article.external_url">
+        <g-image class="card-img-bottom" :src="article.image.replace('/src', '')" />
       </a>
     </p>
   </div>
@@ -34,10 +34,10 @@ export default {
   components: {
     Continent,
   },
-  props: ["post"],
+  props: ["article"],
   data() {
     let data = {};
-    remark().use(remarkHtml).process(this.post.summary, (err, file) => {
+    remark().use(remarkHtml).process(this.article.summary, (err, file) => {
       if (err) {
         console.error(err);
       } else {

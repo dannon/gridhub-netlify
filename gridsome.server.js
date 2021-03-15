@@ -5,6 +5,31 @@
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
+const CATEGORIES = new Map([
+  ["/blog", 'blog'],
+  ["/events", 'events'],
+  ["/news", 'news'],
+  ["/careers", 'careers'],
+]);
+
+function categorize(pathParts) {
+  /** Take a `pathParts` made by splitting the path on `"/"` and return a category:
+   *  ```
+   *  let path = "/events/2017-02-globus/"
+   *  let pathParts = path.split("/")        // [ "", "events", "2017-02-globus", "" ]
+   *  let category = categorize(pathParts)   // "events"
+   *  ```
+   */
+  let keyParts = pathParts.slice(0, pathParts.length-2);
+  let key = keyParts.join("/");
+  let category = CATEGORIES.get(key);
+  if (category === undefined) {
+    return null;
+  } else {
+    return category;
+  }
+}
+
 function dateToStr(date) {
   // Turn a `Date` object into a string like "2021-03-12".
   return date.toISOString().slice(0,10);
@@ -21,7 +46,7 @@ module.exports = function(api) {
      *      This is supposed to be fixed by Gridsome 1.0.
      */
     actions.addSchemaTypes(`
-      type Post implements Node @infer {
+      type Article implements Node @infer {
         category: String
       }
     `);
@@ -31,9 +56,9 @@ module.exports = function(api) {
   api.onCreateNode(options => {
     let pathParts = options.path.split("/");
     options.filename = options.fileInfo.name;
-    // Posts
-    if (options.internal.typeName === "Post") {
-      options.category = pathParts[1];
+    // Articles - categorize by path
+    if (options.internal.typeName === "Article") {
+      options.category = categorize(pathParts);
     }
     return options;
   });

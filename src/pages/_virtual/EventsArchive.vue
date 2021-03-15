@@ -14,7 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <PostTableEvents v-for="edge in $page.events.edges" :key="edge.node.id" :post="edge.node" />
+        <ArticleTableEvents v-for="edge in $page.events.edges" :key="edge.node.id" :article="edge.node" />
       </tbody>
     </table>
     <footer class="page-footer" v-if="$page.footer" v-html="$page.footer.content" />
@@ -22,10 +22,10 @@
 </template>
 
 <script>
-import PostTableEvents from '@/components/PostTableEvents';
+import ArticleTableEvents from '@/components/ArticleTableEvents';
 export default {
   components: {
-    PostTableEvents,
+    ArticleTableEvents,
   },
   metaInfo() {
     return {
@@ -47,7 +47,7 @@ query ($today: Date!) {
     title
     content
   }
-  events: allPost(
+  events: allArticle(
       sortBy: "date", order: DESC, filter: { category: { eq: "events" }, date: { lt: $today } }
     ) {
     totalCount

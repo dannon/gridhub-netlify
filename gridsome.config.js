@@ -23,7 +23,7 @@ function rmPathPrefix(path, depth, absolute=null) {
   }
 }
 function makeFilenamePath(prefix, node) {
-  let directory = rmPathPrefix(node.fileInfo.directory, 2, absolute=false);
+  let directory = rmPathPrefix(node.fileInfo.directory, 1, absolute=false);
   let path;
   if (directory === "") {
     path = node.fileInfo.name;
@@ -41,8 +41,7 @@ module.exports = {
   siteName: 'Galaxy Community Hub: The Squeakquel',
   siteDescription: 'All about Galaxy and its community',
   templates: {
-    Post: node => logAndReturn("Post", rmPathPrefix(node.path, 2)),
-    Standalone: node => logAndReturn("Standalone", rmPathPrefix(node.path, 2)),
+    Article: node => logAndReturn("Article", rmPathPrefix(node.path, 1)),
     Insert: node => logAndReturn("Insert", makeFilenamePath("insert", node)),
   },
   // Path globbing rules: https://www.npmjs.com/package/globby#user-content-globbing-patterns
@@ -50,21 +49,14 @@ module.exports = {
     {
       use: '@gridsome/source-filesystem',
       options: {
-        path: 'content/posts/*/*/**/index.md',
-        typeName: 'Post',
+        path: 'content/**/index.md',
+        typeName: 'Article',
       }
     },
     {
       use: '@gridsome/source-filesystem',
       options: {
-        path: 'content/standalone/*/**/index.md',
-        typeName: 'Standalone',
-      }
-    },
-    {
-      use: '@gridsome/source-filesystem',
-      options: {
-        path: 'content/inserts/**/*.md',
+        path: ['content/**/*.md', '!content/**/index.md'],
         typeName: 'Insert',
       }
     },
