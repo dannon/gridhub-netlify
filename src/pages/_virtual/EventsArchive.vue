@@ -48,7 +48,8 @@ query ($today: Date!) {
     content
   }
   events: allArticle(
-      sortBy: "date", order: DESC, filter: { category: { eq: "events" }, date: { lt: $today } }
+      sortBy: "date", order: DESC,
+      filter: { category: { eq: "events" }, date: { lt: $today } }
     ) {
     totalCount
     edges {

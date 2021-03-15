@@ -36,7 +36,7 @@ query {
     title
     content
   }
-  articles: allArticle(filter: { category: { eq: "careers" }, date: { ne: "" }}) {
+  articles: allArticle(sortBy: "date", order: DESC, filter: { category: { eq: "careers" }}) {
     totalCount
     edges {
       node {

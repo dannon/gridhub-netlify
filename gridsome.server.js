@@ -48,6 +48,7 @@ module.exports = function(api) {
     actions.addSchemaTypes(`
       type Article implements Node @infer {
         category: String
+        hasDate: Boolean
       }
     `);
   });
@@ -56,9 +57,17 @@ module.exports = function(api) {
   api.onCreateNode(options => {
     let pathParts = options.path.split("/");
     options.filename = options.fileInfo.name;
-    // Articles - categorize by path
+    // Articles
     if (options.internal.typeName === "Article") {
+      // Categorize by path.
       options.category = categorize(pathParts);
+      // Label ones with dates.
+      // This gets around the inability of the GraphQL schema to query on null/empty dates.
+      if (options.date) {
+        options.hasDate = true;
+      } else {
+        options.hasDate = false;
+      }
     }
     return options;
   });

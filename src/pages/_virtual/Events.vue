@@ -85,7 +85,7 @@ query ($today: Date!, $oneYearAgo: Date!) {
   }
   recent: allArticle(
       sortBy: "date", order: DESC, filter: {
-        category: { eq: "events" }, date: { between: [$oneYearAgo, $today] }
+        category: { eq: "events" }, date: { between: [$oneYearAgo, $today] }, hasDate: { eq: true }
       }
     ) {
     totalCount
