@@ -6,36 +6,73 @@ It contains no content. To add content, clone this, then create a `content` dire
 
 ## Creating static pages
 
-To see an example of how the files are organized, see the [`content`](https://github.com/NickSto/galaxy-hub/tree/gridhub/content) directory of [`gridhub`](https://github.com/NickSto/galaxy-hub/tree/gridhub) branch of [`galaxy-hub`](https://github.com/galaxyproject/galaxy-hub).
+### File organization
 
-For static pages, you create a directory, whose name becomes the last part of the url. Then you create an `index.md` file inside it.
+To see an example of how the files are organized, see the [`src`](https://github.com/NickSto/galaxy-hub/tree/gridhub/src) directory of the [`gridhub`](https://github.com/NickSto/galaxy-hub/tree/gridhub) branch of [`galaxy-hub`](https://github.com/galaxyproject/galaxy-hub).
 
-There are two types of static pages: Posts and Standalones.
+For static pages (normal, informational pages), you create a directory, whose name becomes the last part of the url. Then you create an `index.md` file inside it. The url will be everything *after* `content` and *before* `index.md`:
 
-### Posts
+| Path to Markdown file                        | URL path                      |
+|:---------------------------------------------|:----------------------------- |
+| `content/events/2021-02-gtn/index.md`        | `/events/2021-02-gtn/`        |
+| `content/galaxy-project/statistics/index.md` | `/galaxy-project/statistics/` |
 
-These pages are part of a series, like blog posts, news posts, or events.
+### Writing the Markdown
 
-To create a series (a [Collection](https://gridsome.org/docs/collections/) in Gridsome terms), make a directory in `content/posts/` (i.e. `content/posts/events/`. Then for each post, create a directory and `index.md` inside. There are two metadata fields required for each post: a `title` and `date`.
+You can use HTML in your `.md` files, but it's best to avoid it when possible. If you must use HTML, you'll have to keep the HTML on a separate line from the Markdown, and keep a blank line between them (on both sides). If you're struggling to get the layout you want, one trick is to surround a bit of Markdown with a `<div>` of a class that gives you the right layout, like:
+```markdown
+<div class="float-right">
 
-The url will be the directory path minus the `content/posts` part. I.e. `content/posts/events/2017-02-biogenomics-workshop/index.md` will be at `domain.com/events/2017-02-biogenomics-workshop/`.
+![alt text](./image.jpg)
 
-### Standalones
+</div>
+```
 
-These are one-off pages not (automatically) part of any series. You can just write any content you want about any topic, and place it at any url.
+### Images
 
-Just create a directory inside `content/standalone/` and put an `index.md` inside. The only required metadata field is `title`. You can put the directory at any depth you want, and the path becomes the url. I.e. `content/standalone/contributing/galaxy-hub/index.md` will be at `domain.com/contributing/galaxy-hub/`.
+You can include images in your `.md` files with the Markdown syntax shown above. If the image is a general one that'd be useful in multiple pages, you should put it in a `static/images/` directory, then reference it with an absolute path: `![galaxy logo](/images/logos/galaxy.jpg)`.
 
-### Inserts
+If the image is a one-off that's only useful for this post, then you can just put it right in the same directory as the `index.md` file. Then reference it with a relative path: `![one-off](./oneoff.jpg)`. **Note** that the `./` is necessary!
 
-These are bits that get filled into other pages (usually dynamically generated ones). For example, you can create a site-wide footer by creating `content/standalone/site-footer.md`. Just fill it with Markdown and it'll be inserted at the bottom of every page on the site. And there's no metadata needed. Just like the static pages, the framework knows what url these go to based solely on where they're placed in the `content` directory. Then their filename determines which part of the page they're inserted into.
+You can resize the image right in Markdown by using [remark-attr](https://www.npmjs.com/package/remark-attr) syntax. Right now, however, there's only a very limited subset of that syntax available. Basically, only the `width` attribute will work on images: `![alt text](./image.jpg){width="50"}` (the width is in pixels).
 
-Each dynamic page can be customized with these. Currently that's:
-| Page           | URL        | Directory               |
-|:-------------- |:---------- |:----------------------- |
-| Homepage       | `/`        | `content/standalone/`   |
-| Events listing | `/events/` | `content/posts/events/` |
-| News listing   | `/news/`   | `content/posts/news/`   |
-| Blog listing   | `/blog/`   | `content/posts/blog/`   |
+## Creating dynamic pages
 
-Each of these pages is dynamic because they contain auto-generated lists of other pages. But you can write whatever you want above the lists by writing Markdown into an `index.md` in the directory for that page. And to write content after the lists, make a `footer.md`.
+Dynamic pages are partially auto-generated. Usually they list a certain group of static pages.
+
+These are created by making a `.vue` file in the `src/pages/` directory. In the future there will be a full explanation of how to create them, but for now here are some important details:
+
+### Defining a category
+
+The top of `gridsome.server.js` defines the `CATEGORIES` variable. It defines each category of pages by their url paths:
+```javascript
+const CATEGORIES = new Map([
+  ["/blog",  "blog"],
+  ["/events", "events"],
+  ["/news", "news"],
+  ["/careers", "careers"],
+]);
+```
+In this example, all urls one level below `/events/` will be put in the `events` category. **Note** that the url must be exactly one level below, not deeper! So `/events/gcc2019/` will match, but not `/events/gcc2019/abstracts/`.
+
+To define a new category, just add another entry to the list, with the parent url on the left (**without** an ending slash) and the category name on the right. Then you can query for pages in that category in your `.vue` file in the `src/pages/` directory.
+
+### Writing static content for dynamic pages
+
+Dynamic pages still usually have some expository static text or images above or below the dynamic content. Instead of keeping this content in the `.vue` framework files, you can keep it in its natural form: Markdown files.
+
+Just make a file named `main.md` in the directory that corresponds to the url of your dynamic page. Then in the `.vue` file, you can query for it and then insert it into your template with a line like:
+```vue
+<div v-html="$page.main.content" />
+```
+To query for it, you need to add a clause to your `<page-query>` like this:
+```graphql
+  main: insert (path: "/insert:events/main/") {
+    id
+    title
+    content
+  }
+```
+..where `events/` is the url of the dynamic page and `main` is the base name of the Markdown file. You can actually name your Markdown file anything as long as you replace that part of the query. A common one is `footer.md` for content that goes below the dynamic content.
+
+FYI, under the hood this is done by defining a Gridsome [collection](https://gridsome.org/docs/collections/) named `Insert`. Any `.md` file *not* named `index.md` automatically becomes an `Insert`.
