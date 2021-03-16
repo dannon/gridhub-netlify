@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const MEDIATED_DIR = "src/pages/_mediated";
+const MEDIATED_DIR = "src/mediated-pages";
 const CATEGORIES = new Map([
   ["/blog",  "blog"],
   ["/events", "events"],
