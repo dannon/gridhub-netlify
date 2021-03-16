@@ -1,16 +1,53 @@
-// Server API makes it possible to hook into various parts of Gridsome
-// on server-side and add custom data to the GraphQL data layer.
-// Learn more: https://gridsome.org/docs/server-api/
+// Using the Server API: https://gridsome.org/docs/server-api/
+const fs = require('fs');
+const path = require('path');
 
-// Changes here require a server restart.
-// To restart press CTRL + C in terminal and run `gridsome develop`
-
+const MEDIATED_DIR = "src/pages/_mediated";
 const CATEGORIES = new Map([
-  ["/blog", 'blog'],
-  ["/events", 'events'],
-  ["/news", 'news'],
-  ["/careers", 'careers'],
+  ["/blog",  "blog"],
+  ["/events", "events"],
+  ["/news", "news"],
+  ["/careers", "careers"],
 ]);
+
+function getFilesDeep(rootDir) {
+  /**
+   * Find all the children of `rootDir`.
+   * Arguments:
+   *   `rootDir` (`String`): An absolute or relative path of a directory.
+   * Returns:
+   *   `files` (`Array`): An array of paths relative to the same directory as the `rootDir`.
+   *     Returns only the paths to files (tested by `isFile()`).
+   */
+  let files = [];
+  let children = fs.readdirSync(rootDir, {withFileTypes: true});
+  for (let child of children) {
+    let childPath = path.join(rootDir,child.name)
+    if (child.isDirectory()) {
+      let descendents = getFilesDeep(childPath);
+      files = files.concat(descendents);
+    } else if (child.isFile()) {
+      files.push(childPath);
+    }
+  }
+  return files;
+}
+
+function fsPathToUrlPath(fsPath) {
+  if (fsPath.indexOf(MEDIATED_DIR) !== 0) {
+    throw `${fsPath} does not start with ${MEDIATED_DIR}`;
+  }
+  let relativePath = fsPath.slice(MEDIATED_DIR.length);
+  let pathParts = path.parse(relativePath);
+  if (pathParts.ext !== ".vue") {
+    throw `${fsPath} does not end in '.vue'`;
+  }
+  let end = pathParts.name.toLowerCase()+"/";
+  if (pathParts.name === 'Index') {
+    end = "";
+  }
+  return path.join(pathParts.dir,end);
+}
 
 function categorize(pathParts) {
   /** Take a `pathParts` made by splitting the path on `"/"` and return a category:
@@ -78,27 +115,16 @@ module.exports = function(api) {
     const oneYearAgo = new Date(now.getFullYear()-1, now.getMonth(), now.getDate());
     const todayStr = dateToStr(now);
     const oneYearAgoStr = dateToStr(oneYearAgo);
-    createPage({
-      path: '/',
-      component: './src/pages/_mediated/Index.vue',
-      context: {
-        today: todayStr,
-      }
-    });
-    createPage({
-      path: '/events/',
-      component: './src/pages/_mediated/Events.vue',
-      context: {
-        today: todayStr,
-        oneYearAgo: oneYearAgoStr,
-      }
-    });
-    createPage({
-      path: '/events/archive/',
-      component: './src/pages/_mediated/EventsArchive.vue',
-      context: {
-        today: todayStr,
-      }
+    const context = {
+      today: todayStr,
+      oneYearAgo: oneYearAgoStr,
+    };
+    getFilesDeep(MEDIATED_DIR).forEach(filePath => {
+      createPage({
+        path: fsPathToUrlPath(filePath),
+        component: filePath,
+        context: context,
+      });
     });
   })
 }
