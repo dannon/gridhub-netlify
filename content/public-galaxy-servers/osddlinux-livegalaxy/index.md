@@ -1,0 +1,3 @@
+---
+redirect: "/use/osddlinux-livegalaxy/"
+---
