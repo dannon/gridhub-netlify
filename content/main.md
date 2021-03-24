@@ -3,7 +3,7 @@ title: Galaxy Community Hub
 layout: homepage.pug
 ---
 Galaxy is an open, web-based platform for accessible, reproducible, and
-transparent computational research.
+transparent computational research.  And this is an example PR.
 
 - **Accessible:** programming experience is not required to easily upload data, run complex tools and workflows, and visualize results.
 - **Reproducible:** Galaxy captures information so that you don't have to; any user can repeat and
